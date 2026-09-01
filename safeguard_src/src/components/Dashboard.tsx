@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Screen } from "../types";
+import type React from "react";
+import { useState } from "react";
+import type { Screen } from "../types";
 import { useStore } from "../store/store";
 
 interface DashboardProps {
