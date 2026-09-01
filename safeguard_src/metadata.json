@@ -1,0 +1,6 @@
+{
+  "name": "SafeGuard",
+  "description": "Multi-screen parental control dashboard with location tracking, screen time limits, content restrictions, and weekly activity reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
