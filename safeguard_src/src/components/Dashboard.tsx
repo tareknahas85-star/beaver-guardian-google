@@ -46,6 +46,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
       <header className="fixed top-0 w-full z-50 bg-surface dark:bg-on-background shadow-[0px_4px_20px_rgba(0,0,0,0.05)] flex justify-between items-center px-5 h-16">
         <div className="flex items-center gap-3">
           <div
+            role="button"
+            tabIndex={0}
+            aria-label="Child profile - open location tracking"
             className="w-10 h-10 rounded-full border-2 border-secondary overflow-hidden bg-surface-container shadow-sm cursor-pointer"
             onClick={() => onNavigate("location-tracking")}
           >
@@ -60,6 +63,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </span>
         </div>
         <button
+          type="button"
+          aria-label="Notifications"
           onClick={() => {
             if (onNotificationClick) onNotificationClick();
             showToast("No new notifications");
@@ -120,7 +125,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
           {/* Usage Progress Ring Bento */}
           <div
+            role="button"
+            tabIndex={0}
+            aria-label="Daily screen time progress - open screen time"
             onClick={() => onNavigate("screen-time")}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") onNavigate("screen-time");
+            }}
             className="md:col-span-8 bg-surface-container-lowest rounded-xl p-6 shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-surface-variant/30 relative overflow-hidden h-[320px] flex flex-col items-center justify-center cursor-pointer hover:border-primary/40 transition-all"
           >
             <div className="absolute top-4 left-6">
@@ -132,7 +143,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
               </p>
             </div>
             <div className="relative w-48 h-48 flex items-center justify-center">
-              <svg className="w-full h-full transform -rotate-90">
+              <svg
+                aria-label="Progress ring"
+                className="w-full h-full transform -rotate-90"
+              >
                 <circle
                   className="text-surface-container"
                   cx="96"
@@ -182,7 +196,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
           {/* Map Mini-Preview Bento Card (Matches spec xpath: //div[contains(@class, 'group') and div[contains(@style, 'background-image')]] ) */}
           <div
+            role="button"
+            tabIndex={0}
+            aria-label="Live tracking - open map"
             onClick={() => onNavigate("location-tracking")}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ")
+                onNavigate("location-tracking");
+            }}
             className="md:col-span-4 bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-surface-variant/30 overflow-hidden relative group cursor-pointer h-[320px]"
           >
             <div
@@ -211,6 +232,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <button
+              type="button"
               onClick={() => {
                 setInternetPaused(!internetPaused);
                 showToast(
@@ -246,6 +268,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             </button>
 
             <button
+              type="button"
               onClick={() => {
                 setDeviceLocked(!deviceLocked);
                 showToast(
@@ -281,6 +304,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
             </button>
 
             <button
+              type="button"
               onClick={() => {
                 setAlarmActive(!alarmActive);
                 showToast(
@@ -324,6 +348,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               Recent Activity
             </h3>
             <button
+              type="button"
               onClick={() => onNavigate("screen-time")}
               className="text-primary font-label-md hover:underline transition-all"
             >
@@ -369,12 +394,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
       {/* BottomNavBar (Satisfies //nav//a[span[text()='child_care']], //nav//a[span[text()='Kids']], //nav//a[span[text()='query_stats']], //nav//a[span[text()='Activity']], //nav//a[span[text()='settings']], //nav//a[span[text()='Settings']]) */}
       <nav className="fixed bottom-0 left-0 w-full z-50 bg-surface dark:bg-on-background shadow-[0px_-4px_20px_rgba(0,0,0,0.05)] rounded-t-xl flex justify-around items-center px-4 py-2 pb-safe">
-        <a
-          href="#dashboard"
-          onClick={(e) => {
-            e.preventDefault();
-            onNavigate("dashboard");
-          }}
+        <button
+          type="button"
+          aria-label="Dashboard"
+          onClick={() => onNavigate("dashboard")}
           className="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 active:scale-90 transition-transform duration-200"
         >
           <span
@@ -384,9 +407,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
             dashboard
           </span>
           <span className="font-label-sm">Dashboard</span>
-        </a>
-        <a
-          href="#kids"
+        </button>
+        <button
+          type="button"
+          aria-label="Kids - Location tracking"
           onClick={(e) => {
             e.preventDefault();
             onNavigate("location-tracking");
@@ -395,9 +419,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
         >
           <span className="material-symbols-outlined">child_care</span>
           <span className="font-label-sm">Kids</span>
-        </a>
-        <a
-          href="#activity"
+        </button>
+        <button
+          type="button"
+          aria-label="Activity - Screen time"
           onClick={(e) => {
             e.preventDefault();
             onNavigate("screen-time");
@@ -406,9 +431,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
         >
           <span className="material-symbols-outlined">query_stats</span>
           <span className="font-label-sm">Activity</span>
-        </a>
-        <a
-          href="#settings"
+        </button>
+        <button
+          type="button"
+          aria-label="Settings - App restrictions"
           onClick={(e) => {
             e.preventDefault();
             onNavigate("app-restrictions");
@@ -417,7 +443,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
         >
           <span className="material-symbols-outlined">settings</span>
           <span className="font-label-sm">Settings</span>
-        </a>
+        </button>
       </nav>
     </div>
   );
